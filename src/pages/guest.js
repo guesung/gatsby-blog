@@ -3,6 +3,8 @@ import { Layout } from '../layout'
 import { graphql } from 'gatsby'
 export default function guest({ data, location }) {
   const { siteMetadata } = data.site
+  const books = data.guest.books
+  console.log(books)
   return (
     <Layout location={location} title={siteMetadata.title}>
       aa
@@ -15,6 +17,12 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+      }
+    }
+    guest {
+      books {
+        title
+        author
       }
     }
   }
