@@ -112,6 +112,15 @@ module.exports = {
         publisherId: metaConfig.ad,
       },
     },
+    {
+      resolve: `gatsby-source-graphql`,
+      options: {
+        fieldName: `guest`,
+        url: `http://localhost:4000`,
+        typeName: `Guest`,
+        refetchInterval: 60,
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-feed`,
