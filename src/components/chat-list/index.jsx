@@ -2,12 +2,40 @@ import React from 'react'
 
 import './index.scss'
 
-export default function ChatList({ chatList }) {
-  console.log(chatList)
+import {
+  ApolloClient,
+  InMemoryCache,
+  HttpLink,
+  gql,
+  useSuspenseQuery,
+} from '@apollo/client'
+
+const client = new ApolloClient({
+  link: new HttpLink({
+    uri: 'http://localhost:4000', // Apollo 서버의 URI를 설정하세요
+  }),
+  cache: new InMemoryCache(),
+})
+
+const GET_DATA = gql`
+  query GetData {
+    chats {
+      message
+      date
+    }
+  }
+`
+
+export default function ChatList() {
+  const { error, data: chatList } = useSuspenseQuery(GET_DATA, { client })
+
+  if (error) {
+    return <span>에러가 발생했습니다.</span>
+  }
   return (
     <section className="chat-room">
-      {chatList.map(chat => (
-        <Chat chat={chat} />
+      {chatList?.chats.map(chat => (
+        <Chat chat={chat} key={chat.date} />
       ))}
     </section>
   )
