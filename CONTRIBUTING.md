@@ -25,7 +25,6 @@ $ git commit [...]
 $ git push origin [YOUR_REPOSITORY]
 
 # Enroll pull-request!
-# in https://github.com/JaeYeopHan/gatsby-starter-bee
 ```
 
 ## Commit message rules
