@@ -9,13 +9,9 @@ import {
   gql,
   useSuspenseQuery,
 } from '@apollo/client'
+import { apoolloClient } from '../../utils/getApoolloClient'
 
-const client = new ApolloClient({
-  link: new HttpLink({
-    uri: 'http://localhost:4000', // Apollo 서버의 URI를 설정하세요
-  }),
-  cache: new InMemoryCache(),
-})
+const client = getApoolloClient()
 
 const GET_DATA = gql`
   query GetData {
