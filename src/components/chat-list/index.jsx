@@ -2,16 +2,8 @@ import React from 'react'
 
 import './index.scss'
 
-import {
-  ApolloClient,
-  InMemoryCache,
-  HttpLink,
-  gql,
-  useSuspenseQuery,
-} from '@apollo/client'
+import { gql, useSuspenseQuery } from '@apollo/client'
 import { getApolloClient } from '../../utils/getApolloClient'
-
-const client = getApolloClient()
 
 const GET_DATA = gql`
   query GetData {
@@ -23,15 +15,15 @@ const GET_DATA = gql`
 `
 
 export default function ChatList() {
-  const { error, data: chatList } = useSuspenseQuery(GET_DATA, { client })
+  const { error, data: chatList } = useSuspenseQuery(GET_DATA)
 
   if (error) {
     return <span>에러가 발생했습니다.</span>
   }
   return (
     <section className="chat-room">
-      {chatList?.chats.map(chat => (
-        <Chat chat={chat} key={chat.date} />
+      {chatList?.chats.map((chat, index) => (
+        <Chat chat={chat} key={index} />
       ))}
     </section>
   )
