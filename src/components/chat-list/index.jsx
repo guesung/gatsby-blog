@@ -9,9 +9,9 @@ import {
   gql,
   useSuspenseQuery,
 } from '@apollo/client'
-import { apoolloClient } from '../../utils/getApoolloClient'
+import { getApolloClient } from '../../utils/getApolloClient'
 
-const client = getApoolloClient()
+const client = getApolloClient()
 
 const GET_DATA = gql`
   query GetData {
