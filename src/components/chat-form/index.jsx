@@ -3,9 +3,6 @@ import React, { useState } from 'react'
 import './index.scss'
 
 import { gql, useMutation } from '@apollo/client'
-import { getApolloClient } from '../../utils/getApolloClient'
-
-const client = getApolloClient()
 
 const ADD_CHAT_MUTATION = gql`
   mutation AddChat($message: String!, $date: String!) {
@@ -25,8 +22,7 @@ export default function ChatForm() {
   }
   const handleSubmit = async event => {
     event.preventDefault()
-    console.log(message)
-    addChat({ variables: { message: 'Hello', date: new Date().toISOString() } })
+    addChat({ variables: { message, date: new Date().toISOString() } })
   }
 
   console.log(data, loading, error)
