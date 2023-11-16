@@ -21,11 +21,17 @@ export default function ChatForm({ refetch }) {
     setMessage(event.target.value)
   }
   const handleSubmit = async event => {
-    event.preventDefault()
-    addChat({ variables: { message, date: new Date().toISOString() } })
-    refetch()
+    event.stopPropagation()
+    await addChat({
+      variables: {
+        message,
+        date: new Date().toISOString(),
+      },
+    })
+    await refetch()
+    setMessage('')
+    document.body.scrollIntoView(false)
   }
-
   if (loading) return 'Submitting...'
   if (error) return `Submission error! ${error.message}`
   return (
