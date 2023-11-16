@@ -13,7 +13,7 @@ const ADD_CHAT_MUTATION = gql`
   }
 `
 
-export default function ChatForm() {
+export default function ChatForm({ refetch }) {
   const [message, setMessage] = useState('')
   const [addChat, { data, loading, error }] = useMutation(ADD_CHAT_MUTATION)
 
@@ -23,9 +23,8 @@ export default function ChatForm() {
   const handleSubmit = async event => {
     event.preventDefault()
     addChat({ variables: { message, date: new Date().toISOString() } })
+    refetch()
   }
-
-  console.log(data, loading, error)
 
   if (loading) return 'Submitting...'
   if (error) return `Submission error! ${error.message}`
