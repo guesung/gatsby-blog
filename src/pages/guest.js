@@ -1,14 +1,26 @@
-import React from 'react'
-import { Layout } from '../layout'
 import { graphql } from 'gatsby'
-export default function guest({ data, location }) {
+import React, { Suspense } from 'react'
+import { Layout } from '../layout'
+
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import GuestBook from '../components/guest-book'
+
+const client = new ApolloClient({
+  uri: 'http://localhost:4000', // Replace with your Apollo Server URL
+  cache: new InMemoryCache(),
+})
+
+export default function guest({ location, data }) {
   const { siteMetadata } = data.site
-  const books = data.guest.books
-  console.log(books)
+
   return (
-    <Layout location={location} title={siteMetadata.title}>
-      aa
-    </Layout>
+    <ApolloProvider client={client}>
+      <Layout location={location} title={siteMetadata.title}>
+        <Suspense fallback={<p>Loading...</p>}>
+          <GuestBook />
+        </Suspense>
+      </Layout>
+    </ApolloProvider>
   )
 }
 
@@ -17,12 +29,6 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
-      }
-    }
-    guest {
-      books {
-        title
-        author
       }
     }
   }

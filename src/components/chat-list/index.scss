@@ -1,0 +1,24 @@
+.chat-room{
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 5px;
+  overflow-x:scroll;
+  
+  height: 600px;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+      display: none;
+  }
+  .chat{
+    background-color:rgb(137, 137, 137);
+    border-radius: 10px;
+    border-bottom-right-radius: 0;
+    padding-top:5px;
+    padding-bottom:5px;
+    padding-left:10px;
+    padding-right:10px;
+    color:inherit;
+  }
+}
