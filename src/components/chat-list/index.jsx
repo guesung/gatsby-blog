@@ -21,7 +21,7 @@ export default function ChatList() {
   }
   return (
     <section className="chat-room">
-      {chatList?.chats.map((chat, index) => (
+      {chatList.chats.map((chat, index) => (
         <Chat chat={chat} key={index} />
       ))}
     </section>

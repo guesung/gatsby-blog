@@ -1,10 +1,9 @@
+import { graphql } from 'gatsby'
 import React, { Suspense } from 'react'
 import { Layout } from '../layout'
-import { graphql } from 'gatsby'
-import ChatList from '../components/chat-list'
-import ChatForm from '../components/chat-form'
 
-import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client'
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client'
+import GuestBook from '../components/guest-book'
 
 const client = new ApolloClient({
   uri: 'http://localhost:4000', // Replace with your Apollo Server URL
@@ -17,11 +16,9 @@ export default function guest({ location, data }) {
   return (
     <ApolloProvider client={client}>
       <Layout location={location} title={siteMetadata.title}>
-        <h1>Guest Book</h1>
         <Suspense fallback={<p>Loading...</p>}>
-          <ChatList />
+          <GuestBook />
         </Suspense>
-        <ChatForm />
       </Layout>
     </ApolloProvider>
   )
