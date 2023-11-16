@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 import './index.scss'
 
@@ -16,6 +16,7 @@ const ADD_CHAT_MUTATION = gql`
 export default function ChatForm({ refetch }) {
   const [message, setMessage] = useState('')
   const [addChat, { data, loading, error }] = useMutation(ADD_CHAT_MUTATION)
+  const inputRef = useRef(null)
 
   const handleInput = event => {
     setMessage(event.target.value)
@@ -31,12 +32,18 @@ export default function ChatForm({ refetch }) {
     await refetch()
     setMessage('')
     document.body.scrollIntoView(false)
+    inputRef.current.focus()
   }
   if (loading) return 'Submitting...'
   if (error) return `Submission error! ${error.message}`
   return (
     <form className="form" onSubmit={handleSubmit}>
-      <input onChange={handleInput} type="text" className="input" />
+      <input
+        onChange={handleInput}
+        type="text"
+        className="input"
+        ref={inputRef}
+      />
       <button type="submit" className="button">
         Send
       </button>
