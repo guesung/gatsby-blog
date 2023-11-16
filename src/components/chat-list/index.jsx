@@ -2,23 +2,9 @@ import React from 'react'
 
 import './index.scss'
 
-import { gql, useSuspenseQuery } from '@apollo/client'
 
-const GET_DATA = gql`
-  query GetData {
-    chats {
-      message
-      date
-    }
-  }
-`
 
-export default function ChatList() {
-  const { error, data: chatList } = useSuspenseQuery(GET_DATA)
-
-  if (error) {
-    return <span>에러가 발생했습니다.</span>
-  }
+export default function ChatList({ chatList }) {
   return (
     <section className="chat-room">
       {chatList.chats.map((chat, index) => (
