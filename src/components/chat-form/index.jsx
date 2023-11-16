@@ -31,9 +31,9 @@ export default function ChatForm({ refetch }) {
     })
     await refetch()
     setMessage('')
-    document.body.scrollIntoView(false)
     inputRef.current.focus()
   }
+
   if (loading) return 'Submitting...'
   if (error) return `Submission error! ${error.message}`
   return (
