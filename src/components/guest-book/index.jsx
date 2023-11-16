@@ -18,10 +18,10 @@ export default function GuestBook() {
 
   if (error) return <span>에러가 발생했습니다.</span>
   return (
-    <>
+    <main>
       <h1>Guest Book</h1>
       <ChatList chatList={chatList} />
       <ChatForm refetch={refetch} />
-    </>
+    </main>
   )
 }
