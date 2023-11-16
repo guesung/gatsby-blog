@@ -2,8 +2,6 @@ import React from 'react'
 
 import './index.scss'
 
-
-
 export default function ChatList({ chatList }) {
   return (
     <section className="chat-room">

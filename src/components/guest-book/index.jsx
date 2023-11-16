@@ -16,9 +16,7 @@ const GET_DATA = gql`
 export default function GuestBook() {
   const { error, data: chatList, refetch } = useSuspenseQuery(GET_DATA)
 
-  if (error) {
-    return <span>에러가 발생했습니다.</span>
-  }
+  if (error) return <span>에러가 발생했습니다.</span>
   return (
     <>
       <h1>Guest Book</h1>
